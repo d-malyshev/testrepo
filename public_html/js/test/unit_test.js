@@ -3,10 +3,10 @@
  */
 
 // Test環境のみで実行
-var autostart = (window.location.href.indexOf("test.myserver.com") > -1) ? true : false;
+QUnit.config.autostart = (window.location.href.indexOf("test.myserver.com") > -1) ? true : false;
 
 // Test環境のみで必要なdivやcssを追加
-if (autostart != false) {
+if (QUnit.config.autostart != false) {
     // 結果表示divを追加
     var d = document;
     var qd = d.createElement('div');
@@ -26,9 +26,7 @@ if (autostart != false) {
     head.appendChild(css);
 }
 
-QUnit.config.autostart = autostart;
-
-// モジュールindexを作成(public_html/index.htmlページのJSをテスト用)
+// モジュールadd_testを作成(public_html/add.htmlページのJSテスト用)
 QUnit.module("add_test");
 
 // 加算Testを実行
@@ -39,7 +37,7 @@ QUnit.test("add_test calculateAdd test", function(assert) {
 });
 
 
-// モジュールgroup_bを作成
+// モジュールsubtract_testを作成(public_html/subtract.htmlページのJSテスト用)
 QUnit.module("subtract_test");
 
 // 引き算Testを実行
