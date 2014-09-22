@@ -1,35 +1,50 @@
 /**
- * 
+ *
  */
-// 結果表示divを追加
-var d = document;
-var qd = d.createElement('div');
-qd.id = "qunit";
-d.body.appendChild(qd);
 
-var qfd = d.createElement('div');
-qfd.id = "qunit-fixture";
-d.body.appendChild(qfd);
+// Test環境のみで実行
+var autostart = (window.location.href.indexOf("test.myserver.com") > -1) ? true : false;
 
-//QUnitのstylesheetを追加
-var head = d.getElementsByTagName('head')[0];
-var css = d.createElement("link")
-css.setAttribute("rel", "stylesheet")
-css.setAttribute("type", "text/css")
-css.setAttribute("href", "//code.jquery.com/qunit/qunit-1.15.0.css");
-head.appendChild(css);
+// Test環境のみで必要なdivやcssを追加
+if (autostart != false) {
+    // 結果表示divを追加
+    var d = document;
+    var qd = d.createElement('div');
+    qd.id = "qunit";
+    d.body.appendChild(qd);
 
-//Testを実行
-QUnit.test( "hello test", function(assert) {
-  assert.ok( 1 == "1", "Passed!" );
-});
+    var qfd = d.createElement('div');
+    qfd.id = "qunit-fixture";
+    d.body.appendChild(qfd);
 
-QUnit.test( "boolean test", function(assert) {
-    assert.ok( booleanFunc() == true, "Passed!" );
-});
+    //QUnitのstylesheetを追加
+    var head = d.getElementsByTagName('head')[0];
+    var css = d.createElement("link")
+    css.setAttribute("rel", "stylesheet")
+    css.setAttribute("type", "text/css")
+    css.setAttribute("href", "//code.jquery.com/qunit/qunit-1.15.0.css");
+    head.appendChild(css);
+}
 
-QUnit.test("calculateAdd test", function(assert) {
+QUnit.config.autostart = autostart;
+
+// モジュールindexを作成(public_html/index.htmlページのJSをテスト用)
+QUnit.module("add_test");
+
+// 加算Testを実行
+QUnit.test("add_test calculateAdd test", function(assert) {
     var value = calculateAdd(1, 2);
     var expected = 3;
-    assert.equal(value, expected, "We expect value to be " + expected);
+    assert.equal(value, expected, "We expect addition result to be " + expected);
+});
+
+
+// モジュールgroup_bを作成
+QUnit.module("subtract_test");
+
+// 引き算Testを実行
+QUnit.test("subtract_test calculateSubtract test", function(assert) {
+    var value = calculateSubtract(2, 1);
+    var expected = 1;
+    assert.equal(value, expected, "We expect subtraction result to be " + expected);
 });
