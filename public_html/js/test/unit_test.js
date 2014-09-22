@@ -2,8 +2,8 @@
  *
  */
 
-// Test環境のみで実行
-QUnit.config.autostart = (window.location.href.indexOf("test.myserver.com") > -1) ? true : false;
+// 本番以外の環境で実行
+QUnit.config.autostart = (window.location.href.indexOf("prod.myserver.com") > -1) ? false : true;
 
 // Test環境のみで必要なdivやcssを追加
 if (QUnit.config.autostart != false) {
