@@ -1,5 +1,5 @@
 /**
- *
+ * Unit Test
  */
 
 // テスト環境のみで実行
@@ -29,7 +29,7 @@ if (QUnit.config.autostart != false) {
 // モジュールadd_testを作成(public_html/add.htmlページのJSテスト用)
 QUnit.module("add_test");
 
-// 加算Testを実行
+// 足し算Testを実行
 QUnit.test("add_test calculateAdd test", function(assert) {
     var value = calculateAdd(1, 2);
     var expected = 3;
